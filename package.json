@@ -1,0 +1,16 @@
+{
+  "name": "ad-factory",
+  "version": "1.0.0",
+  "description": "Static ad generator powered by Gemini image generation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "sql.js": "^1.10.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

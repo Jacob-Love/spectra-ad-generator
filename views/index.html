@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Factory — Spectra</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== SPECTRA DESIGN SYSTEM ===== */
+:root {
+  --bg-base: #0c0b10;
+  --bg-surface: #13121a;
+  --bg-card: #1a1924;
+  --bg-card-hover: #211f2e;
+  --bg-input: #110f18;
+  --bg-elevated: #1e1d29;
+  --border: #2a2837;
+  --border-subtle: #1f1e2a;
+  --border-focus: #3d3a50;
+  --text-primary: #f0eef5;
+  --text-secondary: #9e9bb0;
+  --text-muted: #6b6880;
+  --accent-start: #a855f7;
+  --accent-end: #ec4899;
+  --accent-solid: #a855f7;
+  --accent-hover: #9333ea;
+  --success: #34d399;
+  --danger: #f87171;
+  --warning: #fbbf24;
+  --info: #60a5fa;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.02) inset;
+  --shadow-elevated: 0 8px 32px rgba(0,0,0,0.4);
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== HEADER ===== */
+.app-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 60px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(19, 18, 26, 0.85);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  position: sticky; top: 0; z-index: 100;
+}
+
+.app-logo {
+  font-weight: 700; font-size: 15px; letter-spacing: 3.5px; text-transform: uppercase;
+  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-left { display: flex; align-items: center; gap: 20px; }
+
+.brand-select {
+  background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary);
+  padding: 7px 14px; border-radius: var(--radius); font-family: var(--font-body);
+  font-size: 13px; min-width: 200px; cursor: pointer;
+  transition: border-color 0.2s;
+}
+.brand-select:focus { outline: none; border-color: var(--accent-solid); }
+.brand-select option { background: var(--bg-surface); }
+
+.nav-tabs {
+  display: flex; gap: 2px; background: var(--bg-input); border-radius: var(--radius);
+  padding: 3px; border: 1px solid var(--border-subtle);
+}
+.nav-tab {
+  padding: 6px 18px; border-radius: 8px; border: none; background: transparent;
+  color: var(--text-muted); font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; letter-spacing: 0.2px;
+}
+.nav-tab:hover { color: var(--text-secondary); }
+.nav-tab.active {
+  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+  color: #fff; font-weight: 600;
+}
+
+.main-content { padding: 28px; max-width: 1480px; margin: 0 auto; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  padding: 8px 18px; border-radius: var(--radius); border: 1px solid var(--border);
+  font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+  letter-spacing: 0.2px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+  color: #fff; border: none; font-weight: 600;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-secondary { background: var(--bg-card); color: var(--text-primary); }
+.btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--border-focus); }
+.btn-ghost { background: transparent; color: var(--text-secondary); border-color: transparent; }
+.btn-ghost:hover { color: var(--text-primary); background: var(--bg-card); }
+.btn-danger { background: transparent; color: var(--danger); border-color: rgba(248,113,113,0.3); }
+.btn-danger:hover { background: rgba(248,113,113,0.1); }
+.btn-sm { padding: 5px 12px; font-size: 12px; border-radius: 8px; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* ===== INPUTS ===== */
+input, textarea, select {
+  background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary);
+  padding: 10px 14px; border-radius: var(--radius); font-family: var(--font-body);
+  font-size: 13.5px; width: 100%; transition: border-color 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none; border-color: var(--accent-solid);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+label {
+  display: block; font-size: 12px; font-weight: 600; color: var(--text-muted);
+  margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 22px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--border-focus); }
+
+/* ===== GRIDS ===== */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1200px) { .grid-4 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1024px) { .grid-4, .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+/* ===== BADGES ===== */
+.badge {
+  display: inline-flex; align-items: center; padding: 3px 10px;
+  border-radius: 20px; font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.8px;
+}
+.badge-pending { background: rgba(107,104,128,0.15); color: var(--text-muted); }
+.badge-generating { background: rgba(96,165,250,0.12); color: var(--info); }
+.badge-generated { background: rgba(52,211,153,0.12); color: var(--success); }
+.badge-failed { background: rgba(248,113,113,0.12); color: var(--danger); }
+
+/* ===== CONCEPT CARDS ===== */
+.concept-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px;
+  box-shadow: var(--shadow-card); cursor: pointer;
+  transition: all 0.2s;
+}
+.concept-card:hover { border-color: var(--border-focus); transform: translateY(-1px); }
+.concept-card.selected {
+  border-color: var(--accent-solid);
+  box-shadow: 0 0 0 1px var(--accent-solid), 0 0 20px rgba(168,85,247,0.08);
+}
+.concept-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.concept-card-name { font-weight: 600; font-size: 14px; line-height: 1.3; }
+.concept-card-headline {
+  color: var(--text-secondary); font-size: 12.5px; margin-bottom: 8px;
+  font-style: italic; line-height: 1.4;
+}
+.concept-card-prompt {
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+  max-height: 56px; overflow: hidden; line-height: 1.5;
+  background: var(--bg-input); padding: 8px 10px; border-radius: 8px;
+  position: relative; border: 1px solid var(--border-subtle);
+}
+.concept-card-prompt::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 20px;
+  background: linear-gradient(transparent, var(--bg-input));
+}
+.concept-checkbox {
+  width: 18px; height: 18px; border-radius: 5px; cursor: pointer;
+  accent-color: var(--accent-solid);
+}
+
+/* ===== GALLERY CARDS ===== */
+.gen-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-card); transition: all 0.25s;
+}
+.gen-card:hover {
+  border-color: var(--border-focus); transform: translateY(-3px);
+  box-shadow: var(--shadow-elevated);
+}
+.gen-card img {
+  width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block;
+  cursor: pointer;
+}
+.gen-card-info { padding: 14px; }
+.gen-card-name { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
+.gen-card-date { font-size: 11px; color: var(--text-muted); }
+.gen-card-actions { display: flex; gap: 6px; margin-top: 10px; }
+
+.winner-star {
+  position: absolute; top: 10px; right: 10px; width: 34px; height: 34px;
+  border-radius: 50%; background: rgba(12,11,16,0.7); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08); color: var(--text-muted);
+  font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.winner-star:hover { color: var(--warning); border-color: rgba(251,191,36,0.3); }
+.winner-star.active { color: var(--warning); background: rgba(251,191,36,0.15); border-color: rgba(251,191,36,0.3); }
+
+/* ===== PROGRESS ===== */
+.progress-container {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 22px; margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+}
+.progress-bar-track {
+  width: 100%; height: 4px; background: var(--bg-input);
+  border-radius: 2px; overflow: hidden; margin: 14px 0;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  transition: width 0.4s ease;
+}
+.progress-status { font-size: 13px; color: var(--text-secondary); }
+.progress-log {
+  margin-top: 14px; max-height: 140px; overflow-y: auto;
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+  background: var(--bg-input); padding: 12px; border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  line-height: 1.7;
+}
+
+/* ===== UPLOAD ZONE ===== */
+.upload-zone {
+  border: 1.5px dashed var(--border); border-radius: var(--radius-lg);
+  padding: 36px; text-align: center; cursor: pointer;
+  transition: all 0.2s; color: var(--text-muted);
+  background: rgba(17,15,24,0.5);
+}
+.upload-zone:hover {
+  border-color: var(--accent-solid); color: var(--text-secondary);
+  background: rgba(168,85,247,0.03);
+}
+.upload-zone.dragover {
+  border-color: var(--accent-solid); background: rgba(168,85,247,0.06);
+}
+
+.asset-thumb {
+  width: 72px; height: 72px; object-fit: cover; border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(8,7,12,0.88);
+  backdrop-filter: blur(4px); z-index: 200;
+  display: none; align-items: center; justify-content: center; padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal-content {
+  background: var(--bg-surface); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); max-width: 560px; width: 100%;
+  max-height: 90vh; overflow-y: auto; padding: 28px;
+  box-shadow: var(--shadow-elevated);
+}
+.modal-img {
+  max-width: 90vw; max-height: 85vh; border-radius: var(--radius-lg);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+
+/* ===== SECTION HEADERS ===== */
+.section-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+}
+.section-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+.section-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+
+/* ===== EMPTY STATE ===== */
+.empty-state { text-align: center; padding: 56px 24px; color: var(--text-muted); }
+.empty-state-icon { font-size: 44px; margin-bottom: 14px; opacity: 0.4; }
+.empty-state-text { font-size: 14px; line-height: 1.5; }
+
+/* ===== FILTER BAR ===== */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.filter-tag {
+  padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border);
+  background: transparent; color: var(--text-muted); font-family: var(--font-body);
+  font-size: 12px; cursor: pointer; transition: all 0.2s;
+}
+.filter-tag:hover { border-color: var(--border-focus); color: var(--text-secondary); }
+.filter-tag.active {
+  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+  color: #fff; border-color: transparent; font-weight: 600;
+}
+
+/* ===== PANEL LAYOUT ===== */
+.panel-layout { display: grid; grid-template-columns: 360px 1fr; gap: 28px; }
+@media (max-width: 960px) { .panel-layout { grid-template-columns: 1fr; } }
+
+/* ===== FORM ===== */
+.form-group { margin-bottom: 18px; }
+.form-row { display: flex; gap: 14px; }
+.form-row > * { flex: 1; }
+
+.color-input-wrap { display: flex; align-items: center; gap: 8px; }
+.color-swatch {
+  width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+  cursor: pointer; overflow: hidden; padding: 0; flex-shrink: 0;
+}
+.color-swatch input[type="color"] {
+  width: 50px; height: 50px; border: none; padding: 0; margin: -8px; cursor: pointer;
+}
+
+/* ===== PASTE AREA ===== */
+.paste-area {
+  font-family: var(--font-mono); font-size: 12px; line-height: 1.7;
+  min-height: 260px; border: 1px solid var(--border);
+}
+.paste-area:focus {
+  border-color: var(--accent-solid);
+  box-shadow: 0 0 0 3px rgba(168,85,247,0.1);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-focus); }
+
+/* ===== TOAST ===== */
+.toast-container {
+  position: fixed; bottom: 20px; right: 20px; z-index: 300;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.toast {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 18px; font-size: 13px;
+  color: var(--text-primary); box-shadow: var(--shadow-elevated);
+  animation: toastIn 0.25s ease;
+  display: flex; align-items: center; gap: 8px;
+}
+.toast-error { border-left: 3px solid var(--danger); }
+.toast-success { border-left: 3px solid var(--success); }
+@keyframes toastIn { from { transform: translateY(12px) scale(0.97); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+.hidden { display: none !important; }
+
+/* ===== ACCENT GLOW EFFECT ===== */
+.glow-line {
+  height: 1px; width: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent-start), var(--accent-end), transparent);
+  opacity: 0.3;
+}
+
+/* ===== STAT PILL ===== */
+.stat-pill {
+  background: var(--bg-input); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 10px 14px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.stat-pill-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+.stat-pill-value { font-size: 18px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="app-header">
+  <div class="header-left">
+    <span class="app-logo">SPECTRA</span>
+    <div style="width:1px;height:24px;background:var(--border);"></div>
+    <select class="brand-select" id="brandSelect">
+      <option value="">Select Brand</option>
+    </select>
+    <button class="btn btn-primary btn-sm" onclick="openNewBrandModal()">+ Brand</button>
+  </div>
+  <div class="nav-tabs" id="mainNav">
+    <button class="nav-tab active" data-tab="concepts">Concepts</button>
+    <button class="nav-tab" data-tab="gallery">Gallery</button>
+    <button class="nav-tab" data-tab="brand-setup">Brand Setup</button>
+  </div>
+</header>
+<div class="glow-line"></div>
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Lightbox -->
+<div class="modal-overlay" id="lightbox" onclick="closeLightbox(event)">
+  <img class="modal-img" id="lightboxImg" src="">
+</div>
+
+<!-- New Brand Modal -->
+<div class="modal-overlay" id="newBrandModal">
+  <div class="modal-content">
+    <h3 style="font-size:17px;font-weight:700;margin-bottom:20px;">New Brand</h3>
+    <div class="form-group">
+      <label>Brand Name</label>
+      <input type="text" id="newBrandName" placeholder="e.g. Licensed Peptides">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="newBrandDesc" rows="2" placeholder="What does this brand do?"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Disclaimer Text</label>
+      <input type="text" id="newBrandDisclaimer" placeholder="e.g. For Research Use Only. Not for Human Consumption.">
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:24px;">
+      <button class="btn btn-ghost" onclick="closeModal('newBrandModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="createBrand()">Create Brand</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- No Brand -->
+  <div id="noBrandState" class="empty-state" style="padding-top:100px;">
+    <div style="font-size:56px;margin-bottom:16px;opacity:0.3;">⚡</div>
+    <div style="font-size:16px;font-weight:600;margin-bottom:6px;">Ad Factory</div>
+    <div class="empty-state-text">Select or create a brand to start generating ads</div>
+  </div>
+
+  <!-- ==================== CONCEPTS TAB ==================== -->
+  <div id="tab-concepts" class="hidden">
+    <div class="panel-layout">
+      <!-- Left: Import -->
+      <div>
+        <div class="card" style="margin-bottom:20px;">
+          <div style="font-size:15px;font-weight:700;margin-bottom:3px;">Import Concepts</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Paste Claude-generated ad concepts</div>
+
+          <div class="form-group">
+            <label>Batch Name</label>
+            <input type="text" id="batchName" placeholder="e.g. LP BOGO Campaign v2">
+          </div>
+          <div class="form-group">
+            <label>Concepts</label>
+            <textarea class="paste-area" id="conceptPaste" placeholder='CONCEPT 1 — "Double The Peptides"
+
+Visual World: Molecular / DNA
+
+VISUAL PROMPT FOR NANO BANANA:
+
+"Create a 1:1 ratio static ad..."
+
+---
+
+CONCEPT 2 — "Lab-Verified Purity"
+...'></textarea>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-secondary" onclick="parseConcepts()" style="flex:1;">Parse & Preview</button>
+          </div>
+          <div id="parsePreview" class="hidden" style="margin-top:14px;">
+            <p style="font-size:12px;color:var(--success);margin-bottom:10px;font-weight:600;" id="parseCount"></p>
+            <button class="btn btn-primary" onclick="saveParsedConcepts()" style="width:100%;">Save All Concepts</button>
+          </div>
+        </div>
+
+        <!-- Gen Controls -->
+        <div class="card">
+          <div style="font-size:15px;font-weight:700;margin-bottom:3px;">Generate</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Select concepts and batch generate</div>
+
+          <div class="form-group">
+            <label>Aspect Ratio</label>
+            <select id="aspectRatio">
+              <option value="1:1">1:1 Square</option>
+              <option value="4:5">4:5 Portrait (Feed)</option>
+              <option value="9:16">9:16 Story / Reel</option>
+              <option value="16:9">16:9 Landscape</option>
+              <option value="3:4">3:4 Portrait</option>
+            </select>
+          </div>
+
+          <div style="display:flex;gap:6px;margin-bottom:12px;">
+            <button class="btn btn-ghost btn-sm" onclick="selectAllConcepts()">Select All</button>
+            <button class="btn btn-ghost btn-sm" onclick="deselectAllConcepts()">Deselect</button>
+          </div>
+
+          <button class="btn btn-primary" id="generateBtn" onclick="startBatchGeneration()" style="width:100%;padding:10px 18px;" disabled>
+            ⚡ Generate Selected (0)
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Concepts grid + progress -->
+      <div>
+        <div class="progress-container hidden" id="progressContainer">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-weight:700;font-size:14px;">Generating Ads</span>
+            <span class="progress-status" id="progressStatus">0 / 0</span>
+          </div>
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+          <div class="progress-log" id="progressLog"></div>
+        </div>
+
+        <div class="section-header">
+          <div>
+            <div class="section-title">Concepts</div>
+            <div class="section-subtitle" id="conceptCount">No concepts imported</div>
+          </div>
+        </div>
+
+        <div class="filter-bar" id="conceptFilterBar"></div>
+        <div id="conceptGrid" class="grid-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== GALLERY TAB ==================== -->
+  <div id="tab-gallery" class="hidden">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Generated Ads</div>
+        <div class="section-subtitle" id="galleryCount">No ads generated</div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <button class="filter-tag active" data-filter="all" onclick="filterGallery('all')">All</button>
+        <button class="filter-tag" data-filter="winners" onclick="filterGallery('winners')">⭐ Winners</button>
+      </div>
+    </div>
+    <div id="galleryGrid" class="grid-4"></div>
+  </div>
+
+  <!-- ==================== BRAND SETUP TAB ==================== -->
+  <div id="tab-brand-setup" class="hidden">
+    <div class="grid-2">
+      <!-- Brand Kit -->
+      <div class="card">
+        <div style="font-size:16px;font-weight:700;margin-bottom:20px;">Brand Kit</div>
+        <div class="form-group">
+          <label>Brand Name</label>
+          <input type="text" id="brandName">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="brandDescription" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Disclaimer Text</label>
+          <input type="text" id="brandDisclaimer" placeholder="Appended to every generation prompt">
+        </div>
+        <div class="form-group">
+          <label>Extra Prompt Notes</label>
+          <textarea id="brandExtraNotes" rows="2" placeholder="Additional instructions for every prompt..."></textarea>
+        </div>
+        <div class="form-row" style="margin-bottom:18px;">
+          <div class="form-group">
+            <label>Primary</label>
+            <div class="color-input-wrap">
+              <div class="color-swatch"><input type="color" id="colorPrimary" value="#000000"></div>
+              <input type="text" id="colorPrimaryHex" style="width:90px;" value="#000000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Secondary</label>
+            <div class="color-input-wrap">
+              <div class="color-swatch"><input type="color" id="colorSecondary" value="#333333"></div>
+              <input type="text" id="colorSecondaryHex" style="width:90px;" value="#333333">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Accent</label>
+            <div class="color-input-wrap">
+              <div class="color-swatch"><input type="color" id="colorAccent" value="#a855f7"></div>
+              <input type="text" id="colorAccentHex" style="width:90px;" value="#a855f7">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Logo</label>
+          <div id="logoPreview" style="margin-bottom:8px;"></div>
+          <input type="file" id="logoUpload" accept="image/*" onchange="uploadLogo()" style="font-size:12px;">
+        </div>
+        <button class="btn btn-primary" onclick="saveBrandKit()" style="width:100%;margin-top:4px;">Save Brand Kit</button>
+      </div>
+
+      <!-- Brand Assets -->
+      <div class="card">
+        <div style="font-size:16px;font-weight:700;margin-bottom:4px;">Brand Assets</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:18px;">
+          Upload reference images sent with every generation. Toggle "Include" to control which assets are attached.
+        </div>
+        <div class="upload-zone" id="assetUploadZone" onclick="document.getElementById('assetFileInput').click()">
+          <div style="font-size:28px;margin-bottom:8px;opacity:0.5;">↑</div>
+          <div style="font-size:13px;font-weight:500;">Drop files or click to upload</div>
+          <div style="font-size:11px;margin-top:4px;color:var(--text-muted);">PNG, JPG, WEBP — Max 15MB</div>
+          <input type="file" id="assetFileInput" multiple accept="image/*" onchange="uploadAssets(this.files)" style="display:none;">
+        </div>
+        <div id="assetList" style="margin-top:18px;display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ===================== STATE =====================
+let currentBrandId = null;
+let brands = [];
+let concepts = [];
+let generations = [];
+let brandAssets = [];
+let selectedConcepts = new Set();
+let parsedConceptsBuffer = [];
+let currentFilter = 'all';
+let galleryFilter = 'all';
+
+// ===================== INIT =====================
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadBrands();
+  setupTabs();
+  setupColorSync();
+  setupDragDrop();
+});
+
+// ===================== TABS =====================
+function setupTabs() {
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      showTab(tab.dataset.tab);
+    });
+  });
+}
+
+function showTab(tabId) {
+  ['concepts', 'gallery', 'brand-setup'].forEach(t => {
+    document.getElementById(`tab-${t}`).classList.add('hidden');
+  });
+  if (currentBrandId) {
+    document.getElementById('noBrandState').classList.add('hidden');
+    document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+  }
+}
+
+function getActiveTab() {
+  const active = document.querySelector('.nav-tab.active');
+  return active ? active.dataset.tab : 'concepts';
+}
+
+// ===================== BRANDS =====================
+async function loadBrands() {
+  const res = await fetch('/api/brands');
+  brands = await res.json();
+  const sel = document.getElementById('brandSelect');
+  sel.innerHTML = '<option value="">Select Brand</option>' +
+    brands.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+  sel.onchange = () => {
+    currentBrandId = sel.value ? Number(sel.value) : null;
+    if (currentBrandId) {
+      document.getElementById('noBrandState').classList.add('hidden');
+      showTab(getActiveTab());
+      loadBrandData();
+    } else {
+      document.getElementById('noBrandState').classList.remove('hidden');
+      ['concepts', 'gallery', 'brand-setup'].forEach(t => document.getElementById(`tab-${t}`).classList.add('hidden'));
+    }
+  };
+}
+
+async function loadBrandData() {
+  if (!currentBrandId) return;
+  await Promise.all([loadConcepts(), loadGenerations(), loadBrandAssets(), loadBrandKit()]);
+}
+
+function openNewBrandModal() {
+  document.getElementById('newBrandName').value = '';
+  document.getElementById('newBrandDesc').value = '';
+  document.getElementById('newBrandDisclaimer').value = '';
+  document.getElementById('newBrandModal').classList.add('open');
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+async function createBrand() {
+  const name = document.getElementById('newBrandName').value.trim();
+  if (!name) return toast('Brand name required', 'error');
+  const res = await fetch('/api/brands', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, description: document.getElementById('newBrandDesc').value.trim(), disclaimer_text: document.getElementById('newBrandDisclaimer').value.trim() })
+  });
+  if (!res.ok) { const e = await res.json(); return toast(e.error, 'error'); }
+  const brand = await res.json();
+  closeModal('newBrandModal');
+  await loadBrands();
+  document.getElementById('brandSelect').value = brand.id;
+  document.getElementById('brandSelect').onchange();
+  toast(`Brand "${brand.name}" created`, 'success');
+}
+
+// ===================== BRAND KIT =====================
+async function loadBrandKit() {
+  const brand = brands.find(b => b.id === currentBrandId);
+  if (!brand) return;
+  document.getElementById('brandName').value = brand.name || '';
+  document.getElementById('brandDescription').value = brand.description || '';
+  document.getElementById('brandDisclaimer').value = brand.disclaimer_text || '';
+  document.getElementById('brandExtraNotes').value = brand.extra_notes || '';
+  const cp = brand.color_primary || '#000000';
+  const cs = brand.color_secondary || '#333333';
+  const ca = brand.color_accent || '#a855f7';
+  document.getElementById('colorPrimary').value = cp;
+  document.getElementById('colorPrimaryHex').value = cp;
+  document.getElementById('colorSecondary').value = cs;
+  document.getElementById('colorSecondaryHex').value = cs;
+  document.getElementById('colorAccent').value = ca;
+  document.getElementById('colorAccentHex').value = ca;
+  document.getElementById('logoPreview').innerHTML = brand.logo_path
+    ? `<img src="${brand.logo_path}" style="height:44px;border-radius:8px;border:1px solid var(--border);">`
+    : '';
+}
+
+async function saveBrandKit() {
+  if (!currentBrandId) return;
+  const body = {
+    name: document.getElementById('brandName').value.trim(),
+    description: document.getElementById('brandDescription').value.trim(),
+    disclaimer_text: document.getElementById('brandDisclaimer').value.trim(),
+    extra_notes: document.getElementById('brandExtraNotes').value.trim(),
+    color_primary: document.getElementById('colorPrimaryHex').value,
+    color_secondary: document.getElementById('colorSecondaryHex').value,
+    color_accent: document.getElementById('colorAccentHex').value,
+  };
+  const res = await fetch(`/api/brands/${currentBrandId}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  if (!res.ok) { const e = await res.json(); return toast(e.error, 'error'); }
+  const updated = await res.json();
+  const idx = brands.findIndex(b => b.id === currentBrandId);
+  if (idx >= 0) brands[idx] = updated;
+  toast('Brand kit saved', 'success');
+  await loadBrands();
+  document.getElementById('brandSelect').value = currentBrandId;
+}
+
+async function uploadLogo() {
+  const file = document.getElementById('logoUpload').files[0];
+  if (!file) return;
+  const fd = new FormData(); fd.append('logo', file);
+  const res = await fetch(`/api/brands/${currentBrandId}/logo`, { method: 'POST', body: fd });
+  if (!res.ok) return toast('Logo upload failed', 'error');
+  const data = await res.json();
+  document.getElementById('logoPreview').innerHTML = `<img src="${data.logo_path}" style="height:44px;border-radius:8px;border:1px solid var(--border);">`;
+  const idx = brands.findIndex(b => b.id === currentBrandId);
+  if (idx >= 0) brands[idx].logo_path = data.logo_path;
+  toast('Logo uploaded', 'success');
+}
+
+function setupColorSync() {
+  ['Primary', 'Secondary', 'Accent'].forEach(name => {
+    const picker = document.getElementById(`color${name}`);
+    const hex = document.getElementById(`color${name}Hex`);
+    picker.addEventListener('input', () => { hex.value = picker.value; });
+    hex.addEventListener('input', () => { if (/^#[0-9a-fA-F]{6}$/.test(hex.value)) picker.value = hex.value; });
+  });
+}
+
+// ===================== BRAND ASSETS =====================
+async function loadBrandAssets() {
+  if (!currentBrandId) return;
+  const res = await fetch(`/api/brands/${currentBrandId}/assets`);
+  brandAssets = await res.json();
+  renderAssetList();
+}
+
+function renderAssetList() {
+  const container = document.getElementById('assetList');
+  if (brandAssets.length === 0) {
+    container.innerHTML = '<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:20px;">No assets uploaded</div>';
+    return;
+  }
+  container.innerHTML = brandAssets.map(a => `
+    <div style="display:flex;align-items:center;gap:12px;background:var(--bg-input);padding:10px 12px;border-radius:10px;border:1px solid var(--border-subtle);">
+      <img src="${a.file_path}" class="asset-thumb">
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${a.original_name}</div>
+        <select style="margin-top:4px;padding:3px 8px;font-size:11px;width:auto;border-radius:6px;" onchange="updateAssetCategory(${a.id}, this.value)">
+          ${['Product Image', 'Example Ad', 'Logo', 'Badge', 'Disclaimer', 'Packaging', 'Lifestyle', 'Other'].map(c => `<option value="${c}" ${a.category === c ? 'selected' : ''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <label style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary);white-space:nowrap;cursor:pointer;">
+        <input type="checkbox" ${a.include_in_generation ? 'checked' : ''} onchange="toggleAssetGeneration(${a.id}, this.checked)" style="width:16px;height:16px;accent-color:var(--accent-solid);border-radius:4px;">
+        Include
+      </label>
+      <button class="btn btn-danger btn-sm" onclick="deleteAsset(${a.id})" style="padding:4px 8px;">✕</button>
+    </div>
+  `).join('');
+}
+
+async function uploadAssets(files) {
+  if (!files.length || !currentBrandId) return;
+  const fd = new FormData();
+  const cats = [], flags = [];
+  for (const f of files) { fd.append('assets', f); cats.push('Other'); flags.push(false); }
+  fd.append('categories', JSON.stringify(cats));
+  fd.append('include_in_generation', JSON.stringify(flags));
+  const res = await fetch(`/api/brands/${currentBrandId}/assets`, { method: 'POST', body: fd });
+  if (!res.ok) return toast('Upload failed', 'error');
+  toast(`${files.length} asset(s) uploaded`, 'success');
+  await loadBrandAssets();
+}
+
+async function updateAssetCategory(id, category) {
+  await fetch(`/api/brand-assets/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ category }) });
+}
+
+async function toggleAssetGeneration(id, checked) {
+  await fetch(`/api/brand-assets/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ include_in_generation: checked }) });
+}
+
+async function deleteAsset(id) {
+  if (!confirm('Delete this asset?')) return;
+  await fetch(`/api/brand-assets/${id}`, { method: 'DELETE' });
+  await loadBrandAssets();
+}
+
+function setupDragDrop() {
+  const zone = document.getElementById('assetUploadZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e => { e.preventDefault(); zone.classList.remove('dragover'); if (e.dataTransfer.files.length) uploadAssets(e.dataTransfer.files); });
+}
+
+// ===================== CONCEPTS =====================
+async function loadConcepts() {
+  if (!currentBrandId) return;
+  const res = await fetch(`/api/concepts?brand_id=${currentBrandId}`);
+  concepts = await res.json();
+  selectedConcepts.clear();
+  renderConcepts();
+  updateGenerateButton();
+}
+
+function renderConcepts() {
+  const grid = document.getElementById('conceptGrid');
+  const countEl = document.getElementById('conceptCount');
+  if (concepts.length === 0) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon">📋</div><div class="empty-state-text">No concepts yet — paste your Claude concepts in the panel</div></div>';
+    countEl.textContent = 'No concepts imported';
+    document.getElementById('conceptFilterBar').innerHTML = '';
+    return;
+  }
+  const batches = [...new Set(concepts.map(c => c.batch_name).filter(Boolean))];
+  const filterBar = document.getElementById('conceptFilterBar');
+  filterBar.innerHTML = `<button class="filter-tag ${currentFilter === 'all' ? 'active' : ''}" onclick="filterConcepts('all')">All (${concepts.length})</button>` +
+    batches.map(b => `<button class="filter-tag ${currentFilter === b ? 'active' : ''}" onclick="filterConcepts('${b.replace(/'/g, "\\'")}')">${b} (${concepts.filter(c => c.batch_name === b).length})</button>`).join('') +
+    ['pending', 'generated', 'failed'].map(s => { const n = concepts.filter(c => c.status === s).length; return n ? `<button class="filter-tag ${currentFilter === s ? 'active' : ''}" onclick="filterConcepts('${s}')">${s} (${n})</button>` : ''; }).join('');
+
+  const filtered = currentFilter === 'all' ? concepts : ['pending','generated','failed'].includes(currentFilter) ? concepts.filter(c => c.status === currentFilter) : concepts.filter(c => c.batch_name === currentFilter);
+  countEl.textContent = `${filtered.length} of ${concepts.length} concepts`;
+
+  grid.innerHTML = filtered.map(c => `
+    <div class="concept-card ${selectedConcepts.has(c.id) ? 'selected' : ''}" onclick="toggleConcept(${c.id}, event)">
+      <div class="concept-card-header">
+        <div style="flex:1;min-width:0;">
+          <div class="concept-card-name">${esc(c.concept_name)}</div>
+          <span class="badge badge-${c.status}" style="margin-top:4px;">${c.status}</span>
+        </div>
+        <input type="checkbox" class="concept-checkbox" ${selectedConcepts.has(c.id) ? 'checked' : ''} onclick="event.stopPropagation(); toggleConcept(${c.id}, event)">
+      </div>
+      ${c.headline ? `<div class="concept-card-headline">"${esc(c.headline)}"</div>` : ''}
+      <div class="concept-card-prompt">${esc(c.visual_prompt)}</div>
+      <div style="margin-top:10px;display:flex;gap:6px;">
+        <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); generateSingle(${c.id})">⚡ Generate</button>
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); deleteConcept(${c.id})">✕</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterConcepts(filter) { currentFilter = filter; renderConcepts(); }
+function toggleConcept(id, e) {
+  if (e?.target?.tagName === 'BUTTON') return;
+  selectedConcepts.has(id) ? selectedConcepts.delete(id) : selectedConcepts.add(id);
+  renderConcepts(); updateGenerateButton();
+}
+function selectAllConcepts() {
+  const filtered = currentFilter === 'all' ? concepts : ['pending','generated','failed'].includes(currentFilter) ? concepts.filter(c => c.status === currentFilter) : concepts.filter(c => c.batch_name === currentFilter);
+  filtered.forEach(c => selectedConcepts.add(c.id)); renderConcepts(); updateGenerateButton();
+}
+function deselectAllConcepts() { selectedConcepts.clear(); renderConcepts(); updateGenerateButton(); }
+function updateGenerateButton() {
+  const btn = document.getElementById('generateBtn');
+  const n = selectedConcepts.size;
+  btn.textContent = `⚡ Generate Selected (${n})`;
+  btn.disabled = n === 0;
+}
+async function deleteConcept(id) {
+  if (!confirm('Delete this concept?')) return;
+  await fetch(`/api/concepts/${id}`, { method: 'DELETE' });
+  selectedConcepts.delete(id); await loadConcepts();
+}
+
+// ===================== PARSE =====================
+function parseConcepts() {
+  const raw = document.getElementById('conceptPaste').value.trim();
+  if (!raw) return toast('Paste some concepts first', 'error');
+  parsedConceptsBuffer = [];
+  const blocks = raw.split(/(?=CONCEPT\s+\d+)|(?:^---$)/m).filter(b => b.trim());
+  for (const block of blocks) {
+    const concept = parseConceptBlock(block.trim());
+    if (concept?.visual_prompt) parsedConceptsBuffer.push(concept);
+  }
+  if (parsedConceptsBuffer.length === 0) parsedConceptsBuffer.push({ concept_name: 'Ad Concept', headline: '', body_copy: '', visual_prompt: raw });
+  document.getElementById('parsePreview').classList.remove('hidden');
+  document.getElementById('parseCount').textContent = `✓ ${parsedConceptsBuffer.length} concept(s) parsed`;
+  toast(`Parsed ${parsedConceptsBuffer.length} concept(s)`, 'success');
+}
+
+function parseConceptBlock(block) {
+  const concept = { concept_name: '', headline: '', body_copy: '', visual_prompt: '' };
+  const headerMatch = block.match(/CONCEPT\s*\d*\s*[—–-]\s*["""]?(.+?)["""]?\s*$/m);
+  if (headerMatch) concept.concept_name = headerMatch[1].replace(/["""]/g, '').trim();
+  const promptMatch = block.match(/(?:VISUAL\s+PROMPT|PROMPT)[^:]*:\s*\n*["""]?([\s\S]+)/i);
+  if (promptMatch) {
+    concept.visual_prompt = promptMatch[1].trim().replace(/^["""]/g, '').replace(/["""]$/g, '').trim();
+  } else {
+    const quotedMatch = block.match(/["""](Create\s[\s\S]+?)["""]/);
+    if (quotedMatch) concept.visual_prompt = quotedMatch[1].trim();
+    else { const lines = block.split('\n'); concept.visual_prompt = headerMatch ? lines.slice(1).join('\n').trim() : block; }
+  }
+  const headlineMatch = concept.visual_prompt.match(/Headline[:\s]+['""](.+?)['""]|Headline[:\s]+(.+?)(?:\.|$)/im);
+  if (headlineMatch) concept.headline = (headlineMatch[1] || headlineMatch[2] || '').trim();
+  if (!concept.concept_name && concept.headline) concept.concept_name = concept.headline;
+  if (!concept.concept_name) concept.concept_name = 'Untitled Concept';
+  return concept;
+}
+
+async function saveParsedConcepts() {
+  if (!currentBrandId || !parsedConceptsBuffer.length) return;
+  const res = await fetch('/api/concepts/batch', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ brand_id: currentBrandId, batch_name: document.getElementById('batchName').value.trim(), concepts: parsedConceptsBuffer })
+  });
+  if (!res.ok) { const e = await res.json(); return toast(e.error, 'error'); }
+  parsedConceptsBuffer = [];
+  document.getElementById('conceptPaste').value = '';
+  document.getElementById('parsePreview').classList.add('hidden');
+  await loadConcepts();
+  toast('Concepts saved', 'success');
+}
+
+// ===================== GENERATION =====================
+async function generateSingle(conceptId) {
+  const concept = concepts.find(c => c.id === conceptId);
+  if (!concept) return;
+  toast(`Generating "${concept.concept_name}"...`, 'success');
+  try {
+    const res = await fetch('/api/generate', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ brand_id: currentBrandId, concept_id: conceptId, prompt: concept.visual_prompt, aspect_ratio: document.getElementById('aspectRatio').value })
+    });
+    if (!res.ok) { const e = await res.json(); return toast(e.error, 'error'); }
+    toast('Ad generated!', 'success');
+    await loadConcepts(); await loadGenerations();
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+async function startBatchGeneration() {
+  if (!selectedConcepts.size) return;
+  const conceptIds = [...selectedConcepts];
+  const container = document.getElementById('progressContainer');
+  const bar = document.getElementById('progressBar');
+  const status = document.getElementById('progressStatus');
+  const log = document.getElementById('progressLog');
+  container.classList.remove('hidden');
+  bar.style.width = '0%'; status.textContent = `0 / ${conceptIds.length}`; log.innerHTML = '';
+  document.getElementById('generateBtn').disabled = true;
+
+  try {
+    const res = await fetch('/api/generate/batch', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ brand_id: currentBrandId, concept_ids: conceptIds, aspect_ratio: document.getElementById('aspectRatio').value })
+    });
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n'); buffer = lines.pop() || '';
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if (raw === '[DONE]') continue;
+        try { handleProgressEvent(JSON.parse(raw), conceptIds.length); } catch {}
+      }
+    }
+  } catch (err) { toast(`Batch error: ${err.message}`, 'error'); }
+
+  document.getElementById('generateBtn').disabled = false;
+  await loadConcepts(); await loadGenerations();
+}
+
+function handleProgressEvent(evt, total) {
+  const bar = document.getElementById('progressBar');
+  const status = document.getElementById('progressStatus');
+  const log = document.getElementById('progressLog');
+  if (evt.type === 'start') log.innerHTML += `<div>🚀 ${evt.message}</div>`;
+  else if (evt.type === 'progress') log.innerHTML += `<div style="color:var(--text-muted);">⏳ ${evt.concept_name}...</div>`;
+  else if (evt.type === 'completed') {
+    const pct = ((evt.completed + evt.failed) / total * 100).toFixed(0);
+    bar.style.width = pct + '%'; status.textContent = `${evt.completed + evt.failed} / ${total}`;
+    log.innerHTML += `<div style="color:var(--success);">✓ ${evt.concept_name}</div>`;
+  } else if (evt.type === 'error') {
+    const pct = ((evt.completed + evt.failed) / total * 100).toFixed(0);
+    bar.style.width = pct + '%'; status.textContent = `${evt.completed + evt.failed} / ${total}`;
+    log.innerHTML += `<div style="color:var(--danger);">✗ ${evt.concept_name}: ${evt.error}</div>`;
+  } else if (evt.type === 'done') {
+    log.innerHTML += `<div style="margin-top:6px;font-weight:600;color:var(--text-primary);">${evt.completed} succeeded, ${evt.failed} failed</div>`;
+    toast(evt.message, evt.failed > 0 ? 'error' : 'success');
+  }
+  log.scrollTop = log.scrollHeight;
+}
+
+// ===================== GALLERY =====================
+async function loadGenerations() {
+  if (!currentBrandId) return;
+  const res = await fetch(`/api/generations?brand_id=${currentBrandId}`);
+  generations = await res.json();
+  renderGallery();
+}
+
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  const countEl = document.getElementById('galleryCount');
+  let filtered = galleryFilter === 'winners' ? generations.filter(g => g.is_winner) : generations;
+  countEl.textContent = `${filtered.length} generated ad${filtered.length !== 1 ? 's' : ''}`;
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon">🖼</div><div class="empty-state-text">No generated ads yet</div></div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(g => `
+    <div class="gen-card" style="position:relative;">
+      <button class="winner-star ${g.is_winner ? 'active' : ''}" onclick="toggleWinner(${g.id}, ${g.is_winner ? 0 : 1})">★</button>
+      <img src="${g.image_path}" alt="${esc(g.concept_name || 'Ad')}" onclick="openLightbox('${g.image_path}')" loading="lazy">
+      <div class="gen-card-info">
+        <div class="gen-card-name">${esc(g.concept_name || 'Generated Ad')}</div>
+        ${g.headline ? `<div style="font-size:11px;color:var(--text-muted);font-style:italic;margin-top:2px;">"${esc(g.headline)}"</div>` : ''}
+        <div class="gen-card-date">${new Date(g.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>
+        <div class="gen-card-actions">
+          <a href="${g.image_path}" download class="btn btn-secondary btn-sm">↓ Save</a>
+          <button class="btn btn-danger btn-sm" onclick="deleteGeneration(${g.id})">Delete</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterGallery(filter) {
+  galleryFilter = filter;
+  document.querySelectorAll('#tab-gallery .filter-tag').forEach(t => t.classList.toggle('active', t.dataset.filter === filter));
+  renderGallery();
+}
+
+async function toggleWinner(id, val) {
+  await fetch(`/api/generations/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ is_winner: val }) });
+  await loadGenerations();
+}
+
+async function deleteGeneration(id) {
+  if (!confirm('Delete this ad?')) return;
+  await fetch(`/api/generations/${id}`, { method: 'DELETE' });
+  await loadGenerations();
+}
+
+// ===================== LIGHTBOX =====================
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(e) {
+  if (e.target === document.getElementById('lightbox') || e.target === document.getElementById('lightboxImg'))
+    document.getElementById('lightbox').classList.remove('open');
+}
+
+// ===================== UTILS =====================
+function esc(str) { const d = document.createElement('div'); d.textContent = str || ''; return d.innerHTML; }
+function toast(msg, type = 'success') {
+  const c = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = `toast toast-${type}`;
+  el.textContent = msg;
+  c.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+</script>
+</body>
+</html>
