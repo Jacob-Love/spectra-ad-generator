@@ -860,10 +860,8 @@ function renderConcepts() {
     document.getElementById('conceptFilterBar').innerHTML = '';
     return;
   }
-  const batches = [...new Set(concepts.map(c => c.batch_name).filter(Boolean))];
   const filterBar = document.getElementById('conceptFilterBar');
   filterBar.innerHTML = `<button class="filter-tag ${currentFilter === 'all' ? 'active' : ''}" onclick="filterConcepts('all')">All (${concepts.length})</button>` +
-    batches.map(b => `<button class="filter-tag ${currentFilter === b ? 'active' : ''}" onclick="filterConcepts('${b.replace(/'/g, "\\'")}')">${b} (${concepts.filter(c => c.batch_name === b).length})</button>`).join('') +
     ['pending', 'generated', 'failed'].map(s => { const n = concepts.filter(c => c.status === s).length; return n ? `<button class="filter-tag ${currentFilter === s ? 'active' : ''}" onclick="filterConcepts('${s}')">${s} (${n})</button>` : ''; }).join('');
 
   const filtered = currentFilter === 'all' ? concepts : ['pending','generated','failed'].includes(currentFilter) ? concepts.filter(c => c.status === currentFilter) : concepts.filter(c => c.batch_name === currentFilter);
