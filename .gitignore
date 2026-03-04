@@ -1,0 +1,5 @@
+node_modules/
+.env
+ad-factory.db
+views/index.html.bak
+.claude/
