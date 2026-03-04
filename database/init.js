@@ -74,6 +74,8 @@ async function initDb() {
     );
   `);
 
+  let inTransaction = false;
+
   const wrapper = {
     _db: db,
 
@@ -110,7 +112,7 @@ async function initDb() {
             db.run(sql, params);
             const lastId = db.exec("SELECT last_insert_rowid() as id")[0]?.values[0]?.[0];
             const changes = db.getRowsModified();
-            wrapper.save();
+            if (!inTransaction) wrapper.save();
             return { lastInsertRowid: lastId, changes };
           } catch (e) {
             console.error('SQL run error:', e.message, sql);
@@ -123,12 +125,15 @@ async function initDb() {
     transaction(fn) {
       return (...args) => {
         db.run('BEGIN');
+        inTransaction = true;
         try {
           fn(...args);
           db.run('COMMIT');
+          inTransaction = false;
           wrapper.save();
         } catch (e) {
-          db.run('ROLLBACK');
+          inTransaction = false;
+          try { db.run('ROLLBACK'); } catch (_) {}
           throw e;
         }
       };

@@ -90,7 +90,7 @@ async function generateImageWithGemini({ prompt, referenceImages = [], aspectRat
   // Add the text prompt
   parts.push({ text: prompt });
 
-  const model = 'gemini-2.5-flash-preview-image-generation';
+  const model = 'gemini-3-pro-image-preview';
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
 
   const payload = {
@@ -126,8 +126,8 @@ async function generateImageWithGemini({ prompt, referenceImages = [], aspectRat
   let imageData = null;
   let textResponse = '';
   for (const part of candidateParts) {
-    if (part.inline_data) {
-      imageData = part.inline_data;
+    if (part.inlineData || part.inline_data) {
+      imageData = part.inlineData || part.inline_data;
     }
     if (part.text) {
       textResponse += part.text;
@@ -139,7 +139,8 @@ async function generateImageWithGemini({ prompt, referenceImages = [], aspectRat
   }
 
   // Save to disk
-  const ext = imageData.mime_type?.includes('png') ? '.png' : '.jpg';
+  const mimeType = imageData.mimeType || imageData.mime_type || '';
+  const ext = mimeType.includes('png') ? '.png' : '.jpg';
   const filename = `gen-${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
   const absOutputPath = path.join(GENERATED_DIR, filename);
   fs.writeFileSync(absOutputPath, Buffer.from(imageData.data, 'base64'));

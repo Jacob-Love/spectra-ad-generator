@@ -59,10 +59,8 @@ body {
 }
 
 .app-logo {
-  display: flex; align-items: center; height: 22px;
-}
-.app-logo img {
-  height: 22px; width: auto;
+  font-weight: 700; font-size: 15px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--text-primary);
 }
 
 .header-left { display: flex; align-items: center; gap: 20px; }
@@ -384,12 +382,12 @@ label {
 <!-- Header -->
 <header class="app-header">
   <div class="header-left">
-    <span class="app-logo"><img src="/img/logo.png" alt="Spectra"></span>
+    <span class="app-logo">SPECTRA</span>
     <div style="width:1px;height:24px;background:var(--border);"></div>
     <select class="brand-select" id="brandSelect">
       <option value="">Select Brand</option>
     </select>
-    <button class="btn btn-primary btn-sm" style="padding: 5px 24px; white-space: nowrap;" onclick="openNewBrandModal()">+ Brand</button>
+    <button class="btn btn-primary btn-sm" onclick="openNewBrandModal()">+ Brand</button>
   </div>
   <div class="nav-tabs" id="mainNav">
     <button class="nav-tab active" data-tab="concepts">Concepts</button>
